@@ -961,7 +961,15 @@ npm install --dev commitizen cz-vinyl
 在scripts中添加：
 
 ```shell
-"cz": "git-cz",
+"scripts": {
+   // ...
+   "cz": "git-cz"
+ },
+ "config": {
+   "commitizen": {
+     "path": "cz-vinyl"
+   }
+ },
 ```
 
 使用 `npm run cz` 运行：
