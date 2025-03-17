@@ -1,0 +1,5 @@
+# LXC 概述
+
+LXC为Linux Container的简写。Linux Container 容器是一种内核虚拟化技术，可以提供轻量级的虚拟化，以便隔离进程和资源，而且不需要提供指令解释机制以及全虚拟化的其他复杂性。
+
+LXC主要通过Kernel的namespace实现每个用户实例之间的项目隔离，通过cgroup实现对资源的配额和调度。
