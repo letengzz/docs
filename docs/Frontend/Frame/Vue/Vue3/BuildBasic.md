@@ -1,18 +1,18 @@
 # Vue3 搭建基础环境
 
-由于vite脚手架要禁止*.cjs 和 eslint版本升级废弃rc配置文件， 故重新搭建。
+由于vite脚手架要禁止\*.cjs 和 eslint版本升级废弃rc配置文件， 故重新搭建。
 
 核心采用antfu大神预设配置 替代prettier和eslint设置，保留stylelint原因是暂时antfu不支持。
 
 ## 前置条件
 
-###  node版本
+### node版本
 
 node 最好>20 因为eslint9的需要 本次项目node为20.10.0
 
 ![image-20250107150058871](https://fastly.jsdelivr.net/gh/LetengZzz/img@main/image-20250107150058871.png)
 
-###  vscode 插件
+### vscode 插件
 
 vscode 插件 eslint prettier stylelint unocss vue-official postcss
 
@@ -46,7 +46,7 @@ npm create vue
 
 ![image-20250107154112524](https://fastly.jsdelivr.net/gh/LetengZzz/img@main/image-20250107154112524.png)
 
-## .vscode 配置文件  
+## .vscode 配置文件
 
 > 用于保存带代码格式化
 
@@ -218,8 +218,6 @@ declare module '*.vue' {
 }
 ```
 
-
-
 ## 调整Router
 
 调整router：
@@ -337,9 +335,7 @@ const counter = useCounterStore()
 <template>
   <div class="about">
     <h1>This is an about page {{ counter.count }}</h1>
-    <button @click="counter.increment">
-      加一
-    </button>
+    <button @click="counter.increment">加一</button>
   </div>
 </template>
 
@@ -360,21 +356,25 @@ const counter = useCounterStore()
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
-  }
-  return { count, doubleCount, increment }
-}, {
-  persist: [
-    {
-      pick: ['count'], // 指定字段
-      storage: localStorage, // 存储方式
-    },
-  ],
-})
+export const useCounterStore = defineStore(
+  'counter',
+  () => {
+    const count = ref(0)
+    const doubleCount = computed(() => count.value * 2)
+    function increment() {
+      count.value++
+    }
+    return { count, doubleCount, increment }
+  },
+  {
+    persist: [
+      {
+        pick: ['count'], // 指定字段
+        storage: localStorage, // 存储方式
+      },
+    ],
+  },
+)
 ```
 
 ## UnoCSS
@@ -398,7 +398,7 @@ export default defineConfig({
   // ...
   plugins: [
     // ...
-    UnoCSS()
+    UnoCSS(),
   ],
 })
 ```
@@ -414,7 +414,13 @@ export default defineConfig({
 import presetRemToPx from '@unocss/preset-rem-to-px'
 //transformerDirectives 可以使用 @apply @screen theme函数
 import transformerDirective from '@unocss/transformer-directives'
-import { defineConfig, presetAttributify, presetUno, transformerVariantGroup,presetIcons } from 'unocss'
+import {
+  defineConfig,
+  presetAttributify,
+  presetUno,
+  transformerVariantGroup,
+  presetIcons,
+} from 'unocss'
 
 export default defineConfig({
   presets: [
@@ -422,7 +428,7 @@ export default defineConfig({
     presetUno(),
     // 现在mt-1会转换为 margin-top: 1px
     presetRemToPx({
-        baseFontSize: 4
+      baseFontSize: 4,
     }),
     //自动引入图标配置
     presetIcons({
@@ -430,10 +436,7 @@ export default defineConfig({
       warn: true,
     }),
   ],
-  transformers: [
-    transformerDirective(),
-    transformerVariantGroup(),
-  ],
+  transformers: [transformerDirective(), transformerVariantGroup()],
   //自定义配置
   rules: [
     //自定义配置
@@ -453,7 +456,7 @@ export default defineConfig({
     'flex-between': 'flex justify-between items-center',
     //竖直居中
     'flex-col-center': 'flex flex-col justify-center',
-  }
+  },
 })
 ```
 
@@ -472,67 +475,65 @@ import 'virtual:uno.css' // 引入 uno.css
 
 ```vue
 <template>
-    <div>
-        <h1>UnoCSS</h1>
-        <div class="box"></div>
-        <hr />
-        <div class="h-100 w-100 bg-red-800 text-30 text-blue hover:text-black">小猫米</div>
-        <hr />
-        <div class="box2">小猫咪</div>
-        <hr />
-        <div h100 w100 bg-blueGray text-fuchsia mt10 py20>小猫咪</div>
-        <hr />
-        <div class="wrap" w200 h100 flex-center gap10>
-            <div w20 h20 bg-blue></div>
-            <div w20 h20 bg-blue></div>
-            <div w20 h20 bg-blue></div>
-        </div>
-        <hr />
-        <div i-ep:dish></div>
-        <i w100 h100 block i-ep:switch-button></i>
+  <div>
+    <h1>UnoCSS</h1>
+    <div class="box"></div>
+    <hr />
+    <div class="h-100 w-100 bg-red-800 text-30 text-blue hover:text-black">小猫米</div>
+    <hr />
+    <div class="box2">小猫咪</div>
+    <hr />
+    <div h100 w100 bg-blueGray text-fuchsia mt10 py20>小猫咪</div>
+    <hr />
+    <div class="wrap" w200 h100 flex-center gap10>
+      <div w20 h20 bg-blue></div>
+      <div w20 h20 bg-blue></div>
+      <div w20 h20 bg-blue></div>
     </div>
+    <hr />
+    <div i-ep:dish></div>
+    <i w100 h100 block i-ep:switch-button></i>
+  </div>
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
-.box{
-    width: 100px;
-    height: 100px;
-    background-color: salmon;
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: salmon;
 }
-.box2{
-    @apply h-100 w-100 bg-red-800 text-30 text-blue hover:text-black
+.box2 {
+  @apply h-100 w-100 bg-red-800 text-30 text-blue hover:text-black;
 }
-.wrap{
-    border: 1px solid #ddd;
+.wrap {
+  border: 1px solid #ddd;
 }
 </style>
 ```
 
 ## 使用styleLint
 
-### 依赖包 
+### 依赖包
 
->  "less": "^4.2.0", 
+> "less": "^4.2.0",
 >
->  "postcss": "^8.4.41",
+> "postcss": "^8.4.41",
 >
->  "postcss-html": "^1.7.0",
+> "postcss-html": "^1.7.0",
 >
->  "postcss-less": "^6.0.0",
+> "postcss-less": "^6.0.0",
 >
->  "postcss-scss": "^4.0.9",
+> "postcss-scss": "^4.0.9",
 >
->  "sass": "^1.77.8", 
+> "sass": "^1.77.8",
 >
->  "stylelint": "^16.8.2",
+> "stylelint": "^16.8.2",
 >
->  "stylelint-config-recess-order": "^5.1.0",
+> "stylelint-config-recess-order": "^5.1.0",
 >
->  "stylelint-config-standard": "^36.0.1",
+> "stylelint-config-standard": "^36.0.1",
 
 ### 安装
 
@@ -544,7 +545,6 @@ npm i less sass postcss postcss-html postcss-less postcss-scss sass stylelint st
 ### 配置文件
 
 > stylelint.config.mjs
->
 
 ```js
 /** @type {import('stylelint').Config} */
@@ -552,13 +552,13 @@ export default {
   // stylelint-config-standard 基础配置
   // stylelint-config-recess-order 样式顺序
   extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
-  // 不同文件类型用不同解析器 
+  // 不同文件类型用不同解析器
   overrides: [
     {
       files: ['**/*.(css|html|vue)'],
       customSyntax: 'postcss-html',
     },
-    // 选less可以注释scss 
+    // 选less可以注释scss
     {
       files: ['*.less', '**/*.less'],
       customSyntax: 'postcss-less',
@@ -589,7 +589,7 @@ export default {
     'selector-pseudo-element-no-unknown': [
       true,
       {
-        ignorePseudoElements: ['v-deep',':deep'],
+        ignorePseudoElements: ['v-deep', ':deep'],
       },
     ],
     'at-rule-no-unknown': [
@@ -643,13 +643,11 @@ export default {
   },
   ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
 }
-
 ```
 
- ### 新增脚本 
+### 新增脚本
 
 > package.json
->
 
 ```js
 {
@@ -660,11 +658,9 @@ export default {
 }
 ```
 
-
-### 忽略文件 
+### 忽略文件
 
 > .stylelintignore
->
 
 ```js
 /dist/*
@@ -673,7 +669,7 @@ export default {
 
 ## 采用antfu 组合prettier&eslint
 
-配置网站：https://github.com/antfu/eslint-config/tree/feat/support-eslint-9?tab=readme-ov-file 
+配置网站：https://github.com/antfu/eslint-config/tree/feat/support-eslint-9?tab=readme-ov-file
 
 先选一个unocss 免得后续再去安装unocss的@unocss/eslint-plugin
 
@@ -689,61 +685,59 @@ npx @antfu/eslint-config@latest
 
 ### 安装依赖包
 
->  "@antfu/eslint-config": "^2.27.3",
+> "@antfu/eslint-config": "^2.27.3",
 >
->  "eslint": "^9.9.1",
+> "eslint": "^9.9.1",
 >
->  "eslint-plugin-format": "^0.1.2",
+> "eslint-plugin-format": "^0.1.2",
 >
->  "@unocss/eslint-plugin": "^0.62.3",
+> "@unocss/eslint-plugin": "^0.62.3",
 
 ```js
 npm i
 ```
 
- ### 配置文件
+### 配置文件
 
 修改生成配置文件eslint.config.js为eslint.config.mjs 用于eslint规则校验
 
 > eslint.config.mjs
->
 
 ```js
 import antfu from '@antfu/eslint-config'
 
 export default antfu({
-    // @stylistic/eslint-plugin-plus
-    stylistic: true,
-    // eslint-plugin-format
-    formatters: true,
-    // unocss 检测&格式化 暂时注释 等配置了unocss再开放为true
-    unocss: true,
-    // vue的eslint配置
-    vue: true,
-    // 保存删除未引入的代码
-    // isInEditor: false,
-    // 9x版本 忽略文件这种配置方式 废弃掉eslintignore
-    ignores: [
-        '*.sh',
-        'node_modules',
-        '*.md',
-        '*.woff',
-        '*.ttf',
-        '.idea',
-        '/public',
-        '/docs',
-        '.husky',
-        '.local',
-        '/bin',
-        'Dockerfile',
-    ],
+  // @stylistic/eslint-plugin-plus
+  stylistic: true,
+  // eslint-plugin-format
+  formatters: true,
+  // unocss 检测&格式化 暂时注释 等配置了unocss再开放为true
+  unocss: true,
+  // vue的eslint配置
+  vue: true,
+  // 保存删除未引入的代码
+  // isInEditor: false,
+  // 9x版本 忽略文件这种配置方式 废弃掉eslintignore
+  ignores: [
+    '*.sh',
+    'node_modules',
+    '*.md',
+    '*.woff',
+    '*.ttf',
+    '.idea',
+    '/public',
+    '/docs',
+    '.husky',
+    '.local',
+    '/bin',
+    'Dockerfile',
+  ],
 })
 ```
 
 ### 新增脚本
 
 > package.json
->
 
 ```js
 {
@@ -757,7 +751,7 @@ export default antfu({
 
 ## 代码提交检查
 
-Husky + Lint-staged + Commitlint + Commitizen + cz-git  来配置 Git 提交代码规范。
+Husky + Lint-staged + Commitlint + Commitizen + cz-git 来配置 Git 提交代码规范。
 
 > 核心内容是配置 Husky 的 pre-commit 和 commit-msg 两个钩子:
 >
@@ -765,7 +759,7 @@ Husky + Lint-staged + Commitlint + Commitizen + cz-git  来配置 Git 提交代�
 >
 > commit-msg: Husky + Commitlint + Commitizen + cz-git 整合实现生成规范化且高度自定义的 Git commit message。
 
-### husky  
+### husky
 
 Husky 是 Git 钩子工具，可以设置在 git 各个阶段（`pre-commit`、`commit-msg` 等）触发。
 
@@ -773,25 +767,25 @@ Husky 是 Git 钩子工具，可以设置在 git 各个阶段（`pre-commit`、`
 
 1. 前提条件 项目有.git 如果没有需要生成 有git的话不需要这一步
 
-  ```shell
-  git init
-  ```
+```shell
+git init
+```
 
 2. 自动配置husky
 
-  ```shell
-  npx husky-init
-  ```
+```shell
+npx husky-init
+```
 
-  ![image-20250107210102300](https://fastly.jsdelivr.net/gh/LetengZzz/img@main/image-20250107210102300.png)
+![image-20250107210102300](https://fastly.jsdelivr.net/gh/LetengZzz/img@main/image-20250107210102300.png)
 
 3. 安装husky 执行 `npm i`
 
-  ```js
-  npm i
-  ```
+```js
+npm i
+```
 
-  ![image-20250107210141221](https://fastly.jsdelivr.net/gh/LetengZzz/img@main/image-20250107210141221.png)
+![image-20250107210141221](https://fastly.jsdelivr.net/gh/LetengZzz/img@main/image-20250107210141221.png)
 
 ### Lint-staged 增量检测提交代码
 
@@ -799,105 +793,105 @@ lint-staged 是一个在 git add 到暂存区的文件运行 linters (ESLint/Pre
 
 1. 安装：
 
-  ```js
-  npm i lint-staged -D
-  ```
+```js
+npm i lint-staged -D
+```
 
 2. 新建lint-staged.config.mjs 配置文件
 
-  > lint-staged.config.mjs
+> lint-staged.config.mjs
 
-  ```js
-  /**  @type {import('lint-staged').Config} */
-  export default {
-    '*.{js,jsx,ts,tsx}': ['eslint --fix'],
-    '*.json': ['eslint --fix'],
-    '*.vue': ['eslint --fix'],
-    '*.{scss,less,styl,html}': ['stylelint --fix --allow-empty-input'],
-    '*.md': ['prettier --write'],
-  }
-  ```
+```js
+/**  @type {import('lint-staged').Config} */
+export default {
+  '*.{js,jsx,ts,tsx}': ['eslint --fix'],
+  '*.json': ['eslint --fix'],
+  '*.vue': ['eslint --fix'],
+  '*.{scss,less,styl,html}': ['stylelint --fix --allow-empty-input'],
+  '*.md': ['prettier --write'],
+}
+```
 
 3. 添加指令
 
-  > package.json
+> package.json
 
-  ```json
-  "scripts": {
-    // ...
-    "lint:lint-staged": "lint-staged"
-  },
-  ```
+```json
+"scripts": {
+  // ...
+  "lint:lint-staged": "lint-staged"
+},
+```
 
-4. 文件`.husky/pre-commit`**修改提交前钩子命令** 
+4. 文件`.husky/pre-commit`**修改提交前钩子命令**
 
-  npx命令会自动执行安装过的 lint-staged插件，从而执行lint-staged.config.mjs配置文件
+npx命令会自动执行安装过的 lint-staged插件，从而执行lint-staged.config.mjs配置文件
 
-  ```js
-  #!/usr/bin/env sh
-  . "$(dirname -- "$0")/_/husky.sh"
-  
-  npm run lint:lint-staged --allow-empty
-  ```
+```js
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
 
-  ![image-20240207143016869](https://fastly.jsdelivr.net/gh/LetengZzz/img@main/image-20240207143016869.png)
+npm run lint:lint-staged --allow-empty
+```
 
-### Commitlint 
+![image-20240207143016869](https://fastly.jsdelivr.net/gh/LetengZzz/img@main/image-20240207143016869.png)
 
-Commitlint 检查您的提交消息是否符合 Conventional commit format。 
+### Commitlint
+
+Commitlint 检查您的提交消息是否符合 Conventional commit format。
 
 Commitlint 官网：https://commitlint.js.org/)
 
 1. 安装：
 
-  ```js
-  npm i @commitlint/cli @commitlint/config-conventional -D
-  ```
+```js
+npm i @commitlint/cli @commitlint/config-conventional -D
+```
 
 2. 根目录创建 `commitlint.config.mjs` 配置文件：
 
-  > commitlint.config.mjs
+> commitlint.config.mjs
 
-  ```js
-  /** @type {import("@commitlint/types").UserConfig} */
-  export default {
-    ignores: [commit => commit.includes('init')],
-    extends: ['@commitlint/config-conventional'],
-    rules: {
-      'body-leading-blank': [2, 'always'],
-      'footer-leading-blank': [1, 'always'],
-      'header-max-length': [2, 'always', 108],
-      'subject-empty': [2, 'never'],
-      'type-empty': [2, 'never'],
-      'subject-case': [0],
-      'type-enum': [
-        2,
-        'always',
-        [
-          'feat', // 新增功能
-          'fix', // 修复缺陷
-          'docs', // 文档变更
-          'style', // 代码格式（不影响功能，例如空格、分号等格式修正）
-          'refactor', // 代码重构（不包括 bug 修复、功能新增）
-          'perf', // 性能优化
-          'test', // 添加疏漏测试或已有测试改动
-          'build', // 构建流程、外部依赖变更（如升级 npm 包、修改 webpack 配置等）
-          'ci', // 修改 CI 配置、脚本
-          'revert', // 回滚 commit
-          'chore', // 对构建过程或辅助工具和库的更改（不影响源文件、测试用例）
-        ],
+```js
+/** @type {import("@commitlint/types").UserConfig} */
+export default {
+  ignores: [(commit) => commit.includes('init')],
+  extends: ['@commitlint/config-conventional'],
+  rules: {
+    'body-leading-blank': [2, 'always'],
+    'footer-leading-blank': [1, 'always'],
+    'header-max-length': [2, 'always', 108],
+    'subject-empty': [2, 'never'],
+    'type-empty': [2, 'never'],
+    'subject-case': [0],
+    'type-enum': [
+      2,
+      'always',
+      [
+        'feat', // 新增功能
+        'fix', // 修复缺陷
+        'docs', // 文档变更
+        'style', // 代码格式（不影响功能，例如空格、分号等格式修正）
+        'refactor', // 代码重构（不包括 bug 修复、功能新增）
+        'perf', // 性能优化
+        'test', // 添加疏漏测试或已有测试改动
+        'build', // 构建流程、外部依赖变更（如升级 npm 包、修改 webpack 配置等）
+        'ci', // 修改 CI 配置、脚本
+        'revert', // 回滚 commit
+        'chore', // 对构建过程或辅助工具和库的更改（不影响源文件、测试用例）
       ],
-    },
-  }
-  ```
+    ],
+  },
+}
+```
 
 3. 执行下面命令生成 `commint-msg` 钩子用于 git 提交信息校验
 
-  ```js
-  npx husky add .husky/commit-msg "npx --no -- commitlint --edit $1"
-  ```
+```js
+npx husky add .husky/commit-msg "npx --no -- commitlint --edit $1"
+```
 
-  ![image-20240207142542813](https://fastly.jsdelivr.net/gh/LetengZzz/img@main/image-20240207142542813.png)
+![image-20240207142542813](https://fastly.jsdelivr.net/gh/LetengZzz/img@main/image-20240207142542813.png)
 
 ### Commitizen
 
@@ -911,63 +905,71 @@ npm install --dev commitizen cz-vinyl
 
 ```json
 {
-    "headerFormat": "{type}: {subject}",
-    "commitTypes": [
-        {
-            "description": "一个新的功能",
-            "value": "feat"
-        },
-        {
-            "description": "一个BUG修复",
-            "value": "fix"
-        },
-        {
-            "description": "辅助工具更改或者无法分类的提交",
-            "value": "chore"
-        },
-        {
-            "description": "提高性能的代码更改",
-            "value": "perf"
-        },
-        {
-            "description": "不修复错误也不增加功能的重构代码",
-            "value": "refactor"
-        },
-        {
-            "description": "更新代码格式",
-            "value": "style"
-        },
-        {
-            "description": "添加测试用例",
-            "value": "test"
-        },
-        {
-            "description": "更新文档",
-            "value": "docs"
-        },
-        {
-            "description": "更新CI发版代码",
-            "value": "ci"
-        },
-        {
-            "description": "更新构建依赖等模块",
-            "value": "build"
-        }
-    ],
-    "skipScope": true,
-    "skipTicketId": true,
-    "subjectMaxLength": 70,
-    "subjectMinLength": 3,
-    "typeQuestion": "请选择一个提交类型：",
-    "subjectQuestion": "请输入一个提交信息：",
-    "bodyQuestion": "请输入一个提交详细内容（可跳过）："
+  "headerFormat": "{type}: {subject}",
+  "commitTypes": [
+    {
+      "description": "一个新的功能",
+      "value": "feat"
+    },
+    {
+      "description": "一个BUG修复",
+      "value": "fix"
+    },
+    {
+      "description": "辅助工具更改或者无法分类的提交",
+      "value": "chore"
+    },
+    {
+      "description": "提高性能的代码更改",
+      "value": "perf"
+    },
+    {
+      "description": "不修复错误也不增加功能的重构代码",
+      "value": "refactor"
+    },
+    {
+      "description": "更新代码格式",
+      "value": "style"
+    },
+    {
+      "description": "添加测试用例",
+      "value": "test"
+    },
+    {
+      "description": "更新文档",
+      "value": "docs"
+    },
+    {
+      "description": "更新CI发版代码",
+      "value": "ci"
+    },
+    {
+      "description": "更新构建依赖等模块",
+      "value": "build"
+    }
+  ],
+  "skipScope": true,
+  "skipTicketId": true,
+  "subjectMaxLength": 70,
+  "subjectMinLength": 3,
+  "typeQuestion": "请选择一个提交类型：",
+  "subjectQuestion": "请输入一个提交信息：",
+  "bodyQuestion": "请输入一个提交详细内容（可跳过）："
 }
 ```
 
 在scripts中添加：
 
 ```shell
-"cz": "git-cz",
+"scripts": {
+  // ...
+  "cz": "git-cz"
+},
+"config": {
+  "commitizen": {
+    "path": "cz-vinyl"
+  }
+},
 ```
 
 使用 `npm run cz` 运行：
@@ -1052,14 +1054,11 @@ export default defineConfig({
 使用：
 
 ```vue
-<script setup>
-</script>
+<script setup></script>
 
 <template>
   <div>
-    <h1 class="num">
-      This is an about page {{ counter.count }}
-    </h1>
+    <h1 class="num">This is an about page {{ counter.count }}</h1>
   </div>
 </template>
 
@@ -1090,18 +1089,16 @@ import viteCompression from 'vite-plugin-compression'
 export default defineConfig({
   plugins: [
     // ...
-    viteCompression(
-      {
-        verbose: true, // 默认即可
-        disable: false, // 开启压缩(不禁用)，默认即可
-        deleteOriginFile: false, // 删除源文件
-        threshold: 10240, // 压缩阈值，以字节为单位。如果一个资源比这个值小，它就不会被压缩。默认是 10240
-        algorithm: 'gzip', // 压缩算法，默认是 gzip
-        ext: '.gz', // 文件类型，默认是 .gz
-      },
-    ),
+    viteCompression({
+      verbose: true, // 默认即可
+      disable: false, // 开启压缩(不禁用)，默认即可
+      deleteOriginFile: false, // 删除源文件
+      threshold: 10240, // 压缩阈值，以字节为单位。如果一个资源比这个值小，它就不会被压缩。默认是 10240
+      algorithm: 'gzip', // 压缩算法，默认是 gzip
+      ext: '.gz', // 文件类型，默认是 .gz
+    }),
   ],
-});
+})
 ```
 
 ## 打包进度
@@ -1148,12 +1145,10 @@ import viteRestart from 'vite-plugin-restart'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-	// ...
-    viteRestart(
-      {
-        restart: ['./*.config.[jt]s', './**/config/*.[jt]s', './*.config.mjs'],
-      },
-    ),
+    // ...
+    viteRestart({
+      restart: ['./*.config.[jt]s', './**/config/*.[jt]s', './*.config.mjs'],
+    }),
   ],
 })
 ```
@@ -1179,9 +1174,9 @@ export default defineConfig({
   plugins: [
     // ...
     svgLoader({
-      defaultImport: 'url', // default 'file' or 'url' 
+      defaultImport: 'url', // default 'file' or 'url'
       svgo: true,
-    })
+    }),
   ],
 })
 ```
@@ -1209,7 +1204,7 @@ export default defineConfig({
       open: true, //注意设置true
       gzipSize: true,
       brotliSize: true,
-    })
+    }),
   ],
 })
 ```
@@ -1229,15 +1224,15 @@ npm i vite-plugin-px2rem -D
 vite.config.ts配置：
 
 ```typescript
-import {px2rem} from 'vite-plugin-px2rem'
+import { px2rem } from 'vite-plugin-px2rem'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     //.
     px2rem({
-      width: 750,//设计稿宽度
+      width: 750, //设计稿宽度
       rootFontSize: 16, //根字体大小
-    })
+    }),
   ],
 })
 ```
@@ -1311,7 +1306,6 @@ export default defineConfig({
         chunkFileNames: 'assets/js/[name].[hash].js', // 用于输出静态资源的命名，[ext]表示文件拓展名
         assetFileNames: 'assets/[ext]/[name].[hash].[ext]',
       },
-
     },
   },
   // ...
@@ -1400,7 +1394,7 @@ export default defineConfig(({ command, mode }) => {
   // 环境变量值转换
   const viteEnv = wrapperEnv(env)
   return {
-    // ... 
+    // ...
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -1557,12 +1551,12 @@ export default defineConfig(({ command, mode }) => {
 
 export function useServer(viteEnv: ViteEnv) {
   return {
-  // 监听所有公共ip
-  // host: '0.0.0.0',
+    // 监听所有公共ip
+    // host: '0.0.0.0',
     cors: true,
     port: viteEnv.VITE_PORT,
     proxy: {
-    // 前缀
+      // 前缀
       '/dev': {
         target: 'http://www.example.com',
         changeOrigin: true,
@@ -1612,7 +1606,6 @@ export function useBuild(viteEnv: ViteEnv) {
 // 插件配置 总入口
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-
 
 import { px2remPlugin } from './px2rem'
 import { svgLoaderPlugin } from './svgLoader'
@@ -1850,6 +1843,6 @@ export default defineConfig({
   "compilerOptions": {
     // ..
     "types": ["element-plus/global"]
-  },
+  }
 }
 ```
