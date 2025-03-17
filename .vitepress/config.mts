@@ -18,7 +18,7 @@ export default defineConfig({
     }
   ],
   description: "Hjc",
-  // base: `/docs-website/`,
+  base: `/docs-website/`,
   head: [
     ['link', { rel: 'icon', href: `/logo.svg` }],
     [
