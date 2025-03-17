@@ -30,10 +30,10 @@ watch(isDark, (dark) => {
       <div style="margin-top: 24px">
         <Giscus
           :key="page.filePath"
-          repo="letengzz/letengzz.github.io"
-          repo-id="R_kgDOM3RbwA"
+          repo="letengzz/docs-website"
+          repo-id="R_kgDOOJuVRA"
           category="Announcements"
-          category-id="DIC_kwDOM3RbwM4CntVQ"
+          category-id="DIC_kwDOOJuVRM4CoID9"
           mapping="title"
           strict="0"
           reactions-enabled="1"
