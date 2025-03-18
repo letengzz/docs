@@ -1,3 +1,5 @@
+import { set_sidebar } from "../utils/auto-gen-sidebar.mjs";	// 改成自己的路径
+
 // 前端基础
 export const FrontBasic = [
     {
@@ -262,20 +264,15 @@ export const FrontOthers = [
             },
             {
                 text: '库', link: '/docs/Frontend/Others/Library/index.md', collapsed: true, items: [
-                    { text: '前端拖拽库 pragmatic-drag-and-drop', link: '/docs/Frontend/Others/Library/pragmatic-drag-and-drop.md' },
+                    { text: '前端拖拽库',collapsed: true,items: [
+                      { text: ' pragmatic-drag-and-drop', link: '/docs/Frontend/Others/Library/pragmatic-drag-and-drop.md' },
+                    ]  },
                 ]
             },
             {
                 text: '模板', link: '/docs/Frontend/Others/Template/index.md', collapsed: true, items: [
                     {
-                        text: '中后台管理系统框架', items: [
-                            { text: 'vue-element-admin', link: '/docs/Frontend/Others/Template/ManagementSystem/vue-element-admin.md' },
-                            { text: 'vue-admin-template', link: '/docs/Frontend/Others/Template/ManagementSystem/vue-admin-template.md' },
-                            { text: 'vue-bag-admin', link: '/docs/Frontend/Others/Template/ManagementSystem/vue-bag-admin.md' },
-                            { text: 'Pure Admin', link: '/docs/Frontend/Others/Template/ManagementSystem/PureAdmin.md' },
-                            { text: 'Fantastic admin', link: '/docs/Frontend/Others/Template/ManagementSystem/Fantasticadmin.md' },
-
-                        ]
+                        text: '中后台管理系统框架',  collapsed: true, items:set_sidebar("/docs/Frontend/Others/Template/ManagementSystem")
                     },
                 ]
             },
