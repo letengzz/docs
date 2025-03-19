@@ -20,7 +20,7 @@ export default defineConfig({
   description: "Hjc",
   base: `/docs-website/`,
   head: [
-    ['link', { rel: 'icon', href: `/logo.svg` }],
+    ['link', { rel: 'icon', href: `/docs-website/logo.svg` }],
     [
     'script',
     {},
@@ -28,7 +28,7 @@ export default defineConfig({
       (function() {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?fb46d28a76aba5f6b6c86d5e0098ab4f";
-        var s = document.getElementsByTagName("script")[0]; 
+        var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
       })();`,
     ],
